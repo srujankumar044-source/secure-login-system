@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="hero">
+
+    <h1>Secure Login System</h1>
+
+    <p>
+        A simple and secure web application
+        for user authentication.
+    </p>
+
+
+    <div class="features">
+
+        <div class="feature">
+
+            <h3>🔐 Password Security</h3>
+
+            <p>
+                User passwords are securely
+                hashed using bcrypt.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <h3>🛡️ SQL Injection Protection</h3>
+
+            <p>
+                Parameterized SQL queries are
+                used to protect user data.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <h3>🔑 Session Management</h3>
+
+            <p>
+                Secure login sessions and
+                logout functionality.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <h3>📱 Optional 2FA</h3>
+
+            <p>
+                Two-factor authentication can
+                be enabled for additional security.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <a href="{{ url_for('register') }}"
+       class="button">
+
+        Create Account
+
+    </a>
+
+</div>
+
+{% endblock %}
