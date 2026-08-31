@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="dashboard">
+
+    <h2>
+        Welcome, {{ user["username"] }}!
+    </h2>
+
+
+    <p>
+        You have successfully logged in.
+    </p>
+
+
+    <div class="user-card">
+
+        <h3>Account Information</h3>
+
+
+        <p>
+            <strong>Username:</strong>
+            {{ user["username"] }}
+        </p>
+
+
+        <p>
+            <strong>Email:</strong>
+            {{ user["email"] }}
+        </p>
+
+
+        <p>
+
+            <strong>2FA Status:</strong>
+
+            {% if user["two_factor_enabled"] %}
+
+                Enabled ✅
+
+            {% else %}
+
+                Disabled ❌
+
+            {% endif %}
+
+        </p>
+
+    </div>
+
+
+    {% if session.get("new_2fa_secret") %}
+
+        <div class="twofa-box">
+
+            <h3>Two-Factor Authentication</h3>
+
+            <p>
+                Your 2FA secret key is:
+            </p>
+
+
+            <code>
+                {{ session.pop("new_2fa_secret") }}
+            </code>
+
+
+            <p>
+                Add this key to your authenticator
+                application.
+            </p>
+
+
+            <p>
+                Keep this key private.
+            </p>
+
+        </div>
+
+    {% endif %}
+
+
+    {% if not user["two_factor_enabled"] %}
+
+        <h3>Enable Two-Factor Authentication</h3>
+
+        <p>
+            Add an extra layer of security to your account.
+        </p>
+
+
+        <form method="POST"
+              action="{{ url_for('enable_2fa') }}">
+
+            <input type="hidden"
+                   name="csrf_token"
+                   value="{{ csrf_token }}">
+
+
+            <button type="submit">
+                Enable 2FA
+            </button>
+
+        </form>
+
+
+    {% else %}
+
+        <h3>Two-Factor Authentication is Enabled</h3>
+
+        <p>
+            Your account is protected with 2FA.
+        </p>
+
+
+        <form method="POST"
+              action="{{ url_for('disable_2fa') }}">
+
+            <input type="hidden"
+                   name="csrf_token"
+                   value="{{ csrf_token }}">
+
+
+            <button type="submit">
+                Disable 2FA
+            </button>
+
+        </form>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}
