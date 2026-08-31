@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="form-container">
+
+    <h2>Two-Factor Authentication</h2>
+
+
+    <p>
+        Your account has two-factor authentication enabled.
+    </p>
+
+
+    <p>
+        Enter the 6-digit code from your
+        authenticator application.
+    </p>
+
+
+    <form method="POST">
+
+        <!-- CSRF protection -->
+
+        <input type="hidden"
+               name="csrf_token"
+               value="{{ csrf_token }}">
+
+
+        <label for="otp">
+            Verification Code
+        </label>
+
+
+        <input
+            type="text"
+            id="otp"
+            name="otp"
+            placeholder="Enter 6-digit code"
+            maxlength="6"
+            minlength="6"
+            inputmode="numeric"
+            pattern="[0-9]{6}"
+            required
+        >
+
+
+        <button type="submit">
+            Verify
+        </button>
+
+    </form>
+
+</div>
+
+{% endblock %}
