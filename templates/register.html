@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="form-container">
+
+    <h2>Create Account</h2>
+
+    <p>
+        Register a new account to use the
+        Secure Login System.
+    </p>
+
+
+    <form method="POST">
+
+        <!-- CSRF protection -->
+
+        <input type="hidden"
+               name="csrf_token"
+               value="{{ csrf_token }}">
+
+
+        <label for="username">
+            Username
+        </label>
+
+        <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Enter username"
+            minlength="3"
+            maxlength="30"
+            required
+        >
+
+
+        <label for="email">
+            Email
+        </label>
+
+        <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Enter email"
+            required
+        >
+
+
+        <label for="password">
+            Password
+        </label>
+
+        <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Minimum 8 characters"
+            minlength="8"
+            required
+        >
+
+
+        <button type="submit">
+            Register
+        </button>
+
+    </form>
+
+
+    <p>
+
+        Already have an account?
+
+        <a href="{{ url_for('login') }}">
+            Login
+        </a>
+
+    </p>
+
+</div>
+
+{% endblock %}
